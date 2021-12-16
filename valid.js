@@ -2,7 +2,8 @@ var app = new Vue({
   el: "#valid",
   data: {
     memberid: '',
-    phone: '',
+    phone_tw: '',
+    phone_ch: '',
     insurance: '',
     checkid: '',
     test: '',
@@ -19,9 +20,18 @@ var app = new Vue({
         return false;
       }
     },
-    phoneNumberValidate(number) {
-      //驗證手機號碼格式
+    phoneNumberTaiwanValidate(number) {
+      //驗證手機號碼格式(台灣)
       let phonevalid = /^09\d{8}$/;
+      if (phonevalid.test(number)) {
+        return number;
+      } else {
+        return false;
+      }
+    },
+    phoneNumberChinaValidate(number) {
+      //驗證手機號碼格式(大陸 共11碼)
+      let phonevalid = /^1[3-9](\d{9})$/;
       if (phonevalid.test(number)) {
         return number;
       } else {
@@ -68,8 +78,11 @@ var app = new Vue({
     memberId() {
       return this.memberValidate(this.memberid);
     },
-    phoneNumber() {
-      return this.phoneNumberValidate(this.phone);
+    phoneNumberTaiwan() {
+      return this.phoneNumberTaiwanValidate(this.phone_tw);
+    },
+    phoneNumberChina() {
+      return this.phoneNumberChinaValidate(this.phone_ch);
     },
     insuranceId() {
       return this.insuranceValidate(this.insurance);
