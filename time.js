@@ -12,3 +12,11 @@ function addDays(date, days) {
     result.setDate(result.getDate() + days);
     return result;
 }
+
+// 輔助函式，回傳日期格式(yyyy-mm-dd hh-mm-ss)
+function dateFormatter() {
+    const d = new Date()
+    const date = d.toISOString().split('T')[0];
+    const time = d.toTimeString().split(' ')[0].replace(/:/g, '-');
+    return `${date} ${time}`
+}
